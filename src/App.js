@@ -40,6 +40,9 @@ const handleChange = (e) => {
         <p>North American Release Date: {releaseNA}</p>
         <p>Japanese Release Date: {releaseJP}</p>
       </div>
+      <div className="Favourites">
+
+      </div>
     </div>
   );
 }
