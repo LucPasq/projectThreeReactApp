@@ -9,7 +9,7 @@ function App() {
   const [releaseNA, setReleaseNA] = useState('');
   const [releaseJP, setReleaseJP] = useState('');
   const [gameSeries, setGameSeries] = useState('');
-  const [userInput, setUserInput] = useState('')
+  const [userInput, setUserInput] = useState('');
 const getAmiibo = async () => {
   const url = new URL (`https://amiiboapi.com/api/amiibo/${userInput}`);
   const res = await fetch(url);
@@ -31,14 +31,15 @@ const handleChange = (e) => {
   return (
     <div className="App">
       <h1>Project Three - Development Initialization</h1>
-      <Dropdown handleChange={handleChange}  userInput={userInput} handleSubmit={handleSubmit} />
-      <p>Amiibo name: {name}</p>
-      <img src={image} alt= 'pic of the amiibo' />
-      <p>Home Series: {gameSeries}</p>
-      <p>Amiibo Series: {amiiboSeries}</p>
-      <p>North American Release Date: {releaseNA}</p>
-      <p>Japanese Release Date: {releaseJP}</p>
-      
+      <div className="Display">
+        <Dropdown handleChange={handleChange}  userInput={userInput} handleSubmit={handleSubmit} />
+        <p>Amiibo name: {name}</p>
+        <img src={image} alt= 'pic of the amiibo' />
+        <p>Home Series: {gameSeries}</p>
+        <p>Amiibo Series: {amiiboSeries}</p>
+        <p>North American Release Date: {releaseNA}</p>
+        <p>Japanese Release Date: {releaseJP}</p>
+      </div>
     </div>
   );
 }
