@@ -1,8 +1,10 @@
-
+import app from './firebase.js';
 import './App.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Dropdown from './Dropdown';
+import {getDatabase, ref, onValue, push, remove } from 'firebase/database';
 function App() {
+  //Variables for basic API calls and display
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [amiiboSeries, setAmiiboSeries] = useState('');
@@ -10,6 +12,16 @@ function App() {
   const [releaseJP, setReleaseJP] = useState('');
   const [gameSeries, setGameSeries] = useState('');
   const [userInput, setUserInput] = useState('');
+  //Basic Variables END
+
+  //Variables for favourites section
+  const [favourites, setFavourites] = useState([]);
+  // const [userFavInput, setUserFavInput] = useState('');
+
+  //Favourites variables END
+
+
+  //Following section preforms API call and assigns relevant data
 const getAmiibo = async () => {
   const url = new URL (`https://amiiboapi.com/api/amiibo/${userInput}`);
   const res = await fetch(url);
@@ -21,6 +33,11 @@ const getAmiibo = async () => {
   setReleaseJP(data.amiibo.release.jp);
   setGameSeries(data.amiibo.gameSeries);
 }
+//API call and data storage END
+
+
+
+//Following manipulates user submission of basic display
 const handleChange = (e) => {
   setUserInput(e.target.value)
  }
@@ -28,6 +45,35 @@ const handleChange = (e) => {
    e.preventDefault();
    getAmiibo(); 
  }
+ //Basic display END
+
+//Following constructs favourites code
+useEffect(() =>{
+  const database = getDatabase(app);
+  const dbRef = ref(database);
+  onValue(dbRef, (response) =>{
+    const favData =response.val();
+    const updatedDbInfo = [];
+    for (let key in favData){
+      updatedDbInfo.push(favData[key]);
+    }
+    setFavourites(updatedDbInfo);
+  })
+},[])
+
+// const handleFavInputChange = (event) => {
+//   setUserFavInput(event.target.value);
+// }
+
+const handleFavSubmit = (event) => {
+  event.preventDefault();
+  const database = getDatabase(app);
+  const dbRef = ref(database);
+  push (dbRef, name, image);
+}
+
+
+//Favourites code END
   return (
     <div className="App">
       <h1>Project Three - Development Initialization</h1>
@@ -41,6 +87,17 @@ const handleChange = (e) => {
         <p>Japanese Release Date: {releaseJP}</p>
       </div>
       <div className="Favourites">
+        <button onClick={handleFavSubmit}>Click here to favourite this amiibo!</button>
+
+        <ul>
+        {favourites.map((favourites) => {
+          return(
+            <li>
+              <p>{favourites}</p>
+            </li>
+          )
+        })}
+      </ul>
 
       </div>
     </div>
