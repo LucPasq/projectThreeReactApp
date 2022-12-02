@@ -3,6 +3,7 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import Dropdown from './Dropdown';
 import {getDatabase, ref, onValue, push, remove } from 'firebase/database';
+
 function App() {
   //Variables for basic API calls and display
   const [name, setName] = useState('');
@@ -61,16 +62,22 @@ useEffect(() =>{
   })
 },[])
 
-// const handleFavInputChange = (event) => {
-//   setUserFavInput(event.target.value);
-// }
-
 const handleFavSubmit = (event) => {
   event.preventDefault();
   const database = getDatabase(app);
   const dbRef = ref(database);
-  push (dbRef, name, image);
+  push (dbRef, image);
 }
+
+const handleRemoveSubmit =(event) => {
+  event.preventDefault();
+  const database = getDatabase(app);
+  const dbRef = ref(database);
+  remove (dbRef);
+}
+ 
+
+
 
 
 //Favourites code END
@@ -88,17 +95,17 @@ const handleFavSubmit = (event) => {
       </div>
       <div className="Favourites">
         <button onClick={handleFavSubmit}>Click here to favourite this amiibo!</button>
-
+        <button onClick={handleRemoveSubmit}>Click here to clear your favorites!</button>
         <ul>
+          <h2>Favourites bar!</h2>
         {favourites.map((favourites) => {
           return(
-            <li>
-              <p>{favourites}</p>
+            <li className="FavList">
+              <img className="FavImg" src={favourites} alt="favourites appear here!"/>
             </li>
           )
         })}
       </ul>
-
       </div>
     </div>
   );

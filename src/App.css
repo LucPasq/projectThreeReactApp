@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  list-style: none;
+}
+
+.FavList{
+  list-style: none;
+  text-decoration: none;
+}
+
+.FavImg{
+  width: 200px;
+  height: 200px;
 }
 
 
