@@ -1,3 +1,7 @@
+body{
+  background-color: skyblue;
+}
+
 .App {
   text-align: center;
   list-style: none;
@@ -12,6 +16,35 @@
   width: 200px;
   height: 200px;
 }
+
+.display {
+  background-color: lightblue;
+}
+
+
+  button {
+    padding: 10px 20px 10px 20px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: lightslategray;
+    background-color: lightgoldenrodyellow;
+}
+
+h1{
+  color: darkslategray;
+  font-size: 30px;
+}
+
+p {
+  color: darkslategrey;
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 18px;
+  color: darkslategray;
+}
+
 
 
 

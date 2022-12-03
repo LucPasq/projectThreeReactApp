@@ -97,7 +97,7 @@ const handleRemoveSubmit =(event) => {
         <button onClick={handleFavSubmit}>Click here to favourite this amiibo!</button>
         <button onClick={handleRemoveSubmit}>Click here to clear your favorites!</button>
         <ul>
-          <h2>Favourites bar!</h2>
+          {/* <h2>Favourites bar!</h2> */}
         {favourites.map((favourites) => {
           return(
             <li className="FavList">
