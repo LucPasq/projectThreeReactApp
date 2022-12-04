@@ -56,7 +56,7 @@ useEffect(() =>{
     const favData =response.val();
     const updatedDbInfo = [];
     for (let key in favData){
-      updatedDbInfo.push(favData[key]);
+      updatedDbInfo.push({key: key, image:favData[key]});
     }
     setFavourites(updatedDbInfo);
   })
@@ -83,11 +83,11 @@ const handleRemoveSubmit =(event) => {
 //Favourites code END
   return (
     <div className="App">
-      <h1>Project Three - Development Initialization</h1>
+      <h1>Amiibo Data Display!</h1>
       <div className="Display">
         <Dropdown handleChange={handleChange}  userInput={userInput} handleSubmit={handleSubmit} />
         <p>Amiibo name: {name}</p>
-        <img src={image} alt= 'pic of the amiibo' />
+        <img src={image} alt= 'Amiibo Pic:' />
         <p>Home Series: {gameSeries}</p>
         <p>Amiibo Series: {amiiboSeries}</p>
         <p>North American Release Date: {releaseNA}</p>
@@ -97,15 +97,15 @@ const handleRemoveSubmit =(event) => {
         <button onClick={handleFavSubmit}>Click here to favourite this amiibo!</button>
         <button onClick={handleRemoveSubmit}>Click here to clear your favorites!</button>
         <ul>
-          {/* <h2>Favourites bar!</h2> */}
         {favourites.map((favourites) => {
           return(
-            <li className="FavList">
-              <img className="FavImg" src={favourites} alt="favourites appear here!"/>
+            <li key={favourites.key} className="FavList">
+              <img className="FavImg" src={favourites.image} alt="Pic of favourite"/>
             </li>
           )
         })}
       </ul>
+      <h2>Favourites appear here</h2>
       </div>
     </div>
   );

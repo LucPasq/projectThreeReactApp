@@ -23,7 +23,7 @@ body{
 
 
   button {
-    padding: 10px 20px 10px 20px;
+    padding: 10px 10px 10px 10px;
     border-width: 2px;
     border-radius: 5px;
     border-color: lightslategray;
@@ -43,6 +43,13 @@ p {
 h2 {
   font-size: 18px;
   color: darkslategray;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 
