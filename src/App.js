@@ -3,7 +3,7 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import Dropdown from './Dropdown';
 import {getDatabase, ref, onValue, push, remove } from 'firebase/database';
-
+import './fonts/Roboto-Regular.ttf';
 function App() {
   //Variables for basic API calls and display
   const [name, setName] = useState('');
@@ -14,14 +14,9 @@ function App() {
   const [gameSeries, setGameSeries] = useState('');
   const [userInput, setUserInput] = useState('');
   //Basic Variables END
-
   //Variables for favourites section
   const [favourites, setFavourites] = useState([]);
-  // const [userFavInput, setUserFavInput] = useState('');
-
   //Favourites variables END
-
-
   //Following section preforms API call and assigns relevant data
 const getAmiibo = async () => {
   const url = new URL (`https://amiiboapi.com/api/amiibo/${userInput}`);
@@ -35,9 +30,6 @@ const getAmiibo = async () => {
   setGameSeries(data.amiibo.gameSeries);
 }
 //API call and data storage END
-
-
-
 //Following manipulates user submission of basic display
 const handleChange = (e) => {
   setUserInput(e.target.value)
@@ -47,7 +39,6 @@ const handleChange = (e) => {
    getAmiibo(); 
  }
  //Basic display END
-
 //Following constructs favourites code
 useEffect(() =>{
   const database = getDatabase(app);
@@ -61,28 +52,21 @@ useEffect(() =>{
     setFavourites(updatedDbInfo);
   })
 },[])
-
 const handleFavSubmit = (event) => {
   event.preventDefault();
   const database = getDatabase(app);
   const dbRef = ref(database);
   push (dbRef, image);
 }
-
 const handleRemoveSubmit =(event) => {
   event.preventDefault();
   const database = getDatabase(app);
   const dbRef = ref(database);
   remove (dbRef);
 }
- 
-
-
-
-
 //Favourites code END
   return (
-    <div className="App">
+    <div className="App wrapper">
       <h1>Amiibo Data Display!</h1>
       <div className="Display">
         <Dropdown handleChange={handleChange}  userInput={userInput} handleSubmit={handleSubmit} />
@@ -107,7 +91,9 @@ const handleRemoveSubmit =(event) => {
       </ul>
       <h2>Favourites appear here</h2>
       </div>
+      <footer>Created at Juno College of Technology: https://junocollege.com/</footer>
     </div>
   );
 }
+// DOM and html display above, along side component used for the dropdown menu
 export default App;
