@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import Dropdown from './Dropdown';
 import {getDatabase, ref, onValue, push, remove } from 'firebase/database';
 import './fonts/Roboto-Regular.ttf';
+
 function App() {
   //Variables for basic API calls and display
   const [name, setName] = useState('');
